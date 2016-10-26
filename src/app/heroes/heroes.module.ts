@@ -30,10 +30,6 @@ import { HeroesService } from './heroes.service';
       }
     ])
   ],
-  exports: [
-    RouterModule
-  ],
-  providers: [HeroesService],
-  bootstrap: []
+  providers: [HeroesService]
 })
 export class HeroesModule { }

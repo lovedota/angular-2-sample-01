@@ -6,6 +6,8 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 
 - This app is using Angular 2.1.0 
 - This app is using modules separation approach (ngModules import module)
+- [Using JQuery](http://www.syntaxsuccess.com/viewarticle/using-jquery-with-angular-2.0)
+- [Another Approach](https://github.com/qdouble/angular-webpack2-starter/blob/master/package.json)
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

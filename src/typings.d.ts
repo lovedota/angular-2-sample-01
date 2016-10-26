@@ -2,3 +2,18 @@
 // https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html
 
 declare var System: any;
+declare var moment: any;
+
+interface JQuery {
+    fullCalendar(options);
+    fullCalendar(method: string, value: any);
+}
+
+interface FullCalendarEvent {
+    id: number | string;
+    title: string;
+    allDay?: boolean;
+    start: Date;
+    end: Date;
+}
+

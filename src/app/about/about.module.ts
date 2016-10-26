@@ -4,13 +4,11 @@ import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule }   from '@angular/router';
 
-import { CommonModule }   from '../common/common.module';
-
-import { DashboardComponent } from './dashboard.component';
+import { AboutComponent } from './about.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -18,11 +16,14 @@ import { DashboardComponent } from './dashboard.component';
     HttpModule,
     RouterModule.forChild([
       {
-        path: '',
-        component: DashboardComponent
+        path: 'about',
+        component: AboutComponent
       }
-    ]),
-    CommonModule
-  ]
+    ])
+  ],
+  exports: [
+    RouterModule
+  ],
+  bootstrap: []
 })
-export class DashboardModule { }
+export class AboutModule { }

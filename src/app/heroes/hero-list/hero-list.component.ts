@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { Hero } from '../hero.model';
-import { HeroComponent } from './hero.component';
 import { HeroesService } from '../heroes.service';
 
 @Component({
@@ -14,14 +13,23 @@ export class HeroListComponent implements OnInit {
     heroes: Hero[];
     selectedHero: Hero;
 
-    constructor(private router: Router, private service: HeroesService) { }
+     constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private service: HeroesService
+    ) { }
 
     async ngOnInit() {
         this.heroes = await this.service.getHeroes();
+
+        this.route.params.forEach((params: Params) => {
+            let id = +params['id']; // (+) converts string 'id' to a number
+
+            this.selectedHero = this.heroes.find(hero => hero.id === id);
+        });
     }
 
     private onSelect(hero: Hero) {
-        //this.selectedHero = hero;
         this.router.navigate(['/hero', hero.id]);
     }
 }
