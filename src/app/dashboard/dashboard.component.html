@@ -1,0 +1,22 @@
+<h2>DASHBOARD CENTER</h2>
+
+<ul>
+    <li *ngFor="let event of events">
+        {{event.id}} - {{event.title}}
+    </li>
+    <button (click)="modal.open()">Open</button>
+</ul>
+
+<app-calendar 
+    [events]="events" 
+    (onEventClicked)="onEventClicked($event)">
+</app-calendar>
+
+<app-modal #modal>
+    <div class="modal-title" *ngIf="selectedEvent">
+        {{selectedEvent.title}}
+    </div>
+     <div class="modal-body" *ngIf="selectedEvent">
+        <p class="bg-info">{{selectedEvent.content}}</p>
+    </div>
+</app-modal>
