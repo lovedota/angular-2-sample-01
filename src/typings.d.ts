@@ -1,8 +1,8 @@
 // Typings reference file, you can add your own global typings here
 // https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html
+/// <reference path="../typings/index.d.ts" />
 
 declare var System: any;
-declare var moment: any;
 
 type FullCalendarMethods = 'destroy' | 'addEventSource' | 'removeEventSource' | 'updateEvent' | 'removeEvents';
 type FullCalendarDefaultViews = 'month' | 'basicWeek' | 'basicDay' | 'agendaWeek' | 'agendaDay' | 'listYear' | 'listMonth' | 'listWeek' | 'listDay';
@@ -12,6 +12,8 @@ interface FullCalendarOptions {
     events: FullCalendarEvent[];
     eventClick?: (event: FullCalendarEvent) => void;
     eventDrop?: (event: FullCalendarEvent, delta, revertFunc) => void;
+    eventResize?: (event: FullCalendarEvent, delta, revertFunc) => void;
+    editable?: boolean;
 }
 
 interface JQuery {
@@ -25,8 +27,7 @@ interface FullCalendarEvent {
     id: number | string;
     title: string;
     allDay?: boolean;
-    start: Date;
-    end: Date;
+    start: moment.Moment;
+    end: moment.Moment;
     content: string;
 }
-

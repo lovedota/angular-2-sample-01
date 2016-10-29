@@ -12,6 +12,7 @@ import {
 export class CalendarComponent implements OnInit, OnDestroy, OnChanges { 
     @Input() events: FullCalendarEvent[];
     @Output() onEventClicked = new EventEmitter<FullCalendarEvent>();
+    @Output() onEventDropped = new EventEmitter<FullCalendarEvent>();
 
     private $element: JQuery;
     
@@ -25,8 +26,12 @@ export class CalendarComponent implements OnInit, OnDestroy, OnChanges {
         this.$element.fullCalendar({
             defaultView: 'agendaDay',
             events: [],
+            editable: true,
             eventClick(event) {
                 self.onEventClicked.emit(event);
+            },
+            eventDrop(event, delta, revertFunc) {
+                self.onEventDropped.emit(event);
             }
         });
     }

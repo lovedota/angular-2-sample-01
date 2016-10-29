@@ -27,14 +27,20 @@ export class DashboardComponent implements OnInit {
                     end: moment().add(8, 'h'),
                     content: 'Need to have lunch to refresh health to work in a whole day'
                 }
-            ]
+            ];
         });
     }
 
     onEventClicked(event) {
         this.selectedEvent = event;
-        
+
         this.modal.open();
     }
 
+    onEventDropped(droppedEvent) {
+        let event = this.events.find(e => e.id === droppedEvent.id);
+
+        event.start = droppedEvent.start;
+        event.end = droppedEvent.end;
+    }
 }

@@ -2,14 +2,14 @@
 
 <ul>
     <li *ngFor="let event of events">
-        {{event.id}} - {{event.title}}
+        {{event.id}} - {{event.title}} - {{ event.start.toDate() | date:"MM/dd/yy hh:mm" }} | {{ event.end.toDate() | date:"MM/dd/yy hh:mm" }}
     </li>
-    <button (click)="modal.open()">Open</button>
 </ul>
 
 <app-calendar 
     [events]="events" 
-    (onEventClicked)="onEventClicked($event)">
+    (onEventClicked)="onEventClicked($event)"
+    (onEventDropped)="onEventDropped($event)">
 </app-calendar>
 
 <app-modal #modal>
