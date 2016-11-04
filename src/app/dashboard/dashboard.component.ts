@@ -4,16 +4,20 @@ import { Component, OnInit, ViewChild } from '@angular/core';
     templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-    events: FullCalendarEvent[];
+    private _events = new Map<number, FullCalendarEvent>();
 
     @ViewChild('modal') modal;
     @ViewChild('calendar') calendar;
 
     selectedEvent: FullCalendarEvent;
 
+    get events() {
+        return [...this._events.values()];
+    }
+
     ngOnInit() {
         setTimeout(() => {
-            this.events = [
+            let events = [
                 {
                     id: 1,
                     title: 'Daily Meeting',
@@ -30,7 +34,9 @@ export class DashboardComponent implements OnInit {
                 }
             ];
 
-            this.calendar.refresh(this.events);
+            events.forEach(e => this._events.set(e.id, e));
+
+            this.calendar.refresh(events);
         });
     }
 
@@ -40,9 +46,9 @@ export class DashboardComponent implements OnInit {
         this.modal.open();
     }
 
-    onDayClicked(date: moment.Moment) {
+    onCalendarClicked(date: moment.Moment) {
         this.selectedEvent = {
-            id: this.events.length + 1,
+            id: this._events.size + 1,
             title: 'New Event',
             content: '',
             start: date,
@@ -53,16 +59,14 @@ export class DashboardComponent implements OnInit {
     }
 
     onEventDropped(droppedEvent) {
-        let event = this.events.find(e => e.id === droppedEvent.id);
+        let event = this._events.get(droppedEvent.id);
 
         event.start = droppedEvent.start;
         event.end = droppedEvent.end;
-
-        this.calendar.refresh(this.events);
     }
 
     onFormSubmited(event) {
-        this.events.push(event);
+        this._events.set(event.id, event);
 
         this.selectedEvent = null;
 

@@ -36,10 +36,9 @@ function elementsFromPoint(x,y) {
     `
 })
 export class CalendarComponent implements OnInit, OnDestroy, OnChanges { 
-    @Input() events: FullCalendarEvent[];
     @Output() onEventClicked = new EventEmitter<FullCalendarEvent>();
     @Output() onEventDropped = new EventEmitter<FullCalendarEvent>();
-    @Output() onDayClicked = new EventEmitter<any>(); 
+    @Output() onCalendarClicked = new EventEmitter<any>(); 
 
     private $element: JQuery;
     
@@ -71,16 +70,14 @@ export class CalendarComponent implements OnInit, OnDestroy, OnChanges {
             },
             viewRender(view, element) {
                 element.on('click', (event) => {
-
                     let acceptClasses = ['fc-widget-content', 'fc-widget-content'];
-                    
-                    let target = event.target;
+                    let target = $(event.target);
 
                     if (acceptClasses.includes(event.target.className)) {
-                        let time = target.getAttribute('data-time') || target.parentElement.getAttribute('data-time');
-                        let date = moment().format('YYYY-MM-DD');
-      
-                        self.onDayClicked.emit(moment(`${date} ${time}`));
+                        let time = target.data('time') || target.parent().data('time');
+                        let date = element.find('.fc-day-header').data('date');
+
+                        self.onCalendarClicked.emit(moment(`${date} ${time}`));
                     }       
                 });
             }
@@ -106,6 +103,6 @@ export class CalendarComponent implements OnInit, OnDestroy, OnChanges {
                 //this.$element.fullCalendar('addEventSource', changedProp.currentValue)
             }
         }
-        console.log(log);
+        //console.log(log);
     }
 }

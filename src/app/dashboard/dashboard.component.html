@@ -8,10 +8,9 @@
 
 <app-calendar 
     #calendar
-    [events]="events" 
     (onEventClicked)="onEventClicked($event)"
     (onEventDropped)="onEventDropped($event)"
-    (onDayClicked)="onDayClicked($event)">
+    (onCalendarClicked)="onCalendarClicked($event)">
 </app-calendar>
 
 <app-modal #modal>

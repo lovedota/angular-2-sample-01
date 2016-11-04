@@ -9,14 +9,6 @@ export class EventFormComponent {
     @Output() onFormSubmit = new EventEmitter<any>();
 
     onSubmit() {
-        let updatedEvent = {
-            id: this.event.id,
-            title: this.event.title,
-            content: this.event.content,
-            start: moment(this.event.start),
-            end: moment(this.event.end)
-        };
-
-        this.onFormSubmit.emit(updatedEvent);
+        this.onFormSubmit.emit(this.event);
     }
 }
