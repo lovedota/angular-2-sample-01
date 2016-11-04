@@ -2,14 +2,16 @@
 
 <ul>
     <li *ngFor="let event of events">
-        {{event.id}} - {{event.title}} - {{ event.start.toDate() | date:"MM/dd/yy hh:mm" }} | {{ event.end.toDate() | date:"MM/dd/yy hh:mm" }}
+        {{event.title}} - {{event.start.format('LLL')}}
     </li>
 </ul>
 
 <app-calendar 
+    #calendar
     [events]="events" 
     (onEventClicked)="onEventClicked($event)"
-    (onEventDropped)="onEventDropped($event)">
+    (onEventDropped)="onEventDropped($event)"
+    (onDayClicked)="onDayClicked($event)">
 </app-calendar>
 
 <app-modal #modal>
@@ -17,6 +19,10 @@
         {{selectedEvent.title}}
     </div>
      <div class="modal-body" *ngIf="selectedEvent">
-        <p class="bg-info">{{selectedEvent.content}}</p>
+        <app-event-form 
+            [event]="selectedEvent"
+            (onFormSubmit)="onFormSubmited($event)"
+        >
+        </app-event-form>
     </div>
 </app-modal>

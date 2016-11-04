@@ -7,6 +7,7 @@ export class DashboardComponent implements OnInit {
     events: FullCalendarEvent[];
 
     @ViewChild('modal') modal;
+    @ViewChild('calendar') calendar;
 
     selectedEvent: FullCalendarEvent;
 
@@ -28,6 +29,8 @@ export class DashboardComponent implements OnInit {
                     content: 'Need to have lunch to refresh health to work in a whole day'
                 }
             ];
+
+            this.calendar.refresh(this.events);
         });
     }
 
@@ -37,10 +40,34 @@ export class DashboardComponent implements OnInit {
         this.modal.open();
     }
 
+    onDayClicked(date: moment.Moment) {
+        this.selectedEvent = {
+            id: this.events.length + 1,
+            title: 'New Event',
+            content: '',
+            start: date,
+            end: date.clone().add(30, 'minutes')
+        };
+
+        this.modal.open();
+    }
+
     onEventDropped(droppedEvent) {
         let event = this.events.find(e => e.id === droppedEvent.id);
 
         event.start = droppedEvent.start;
         event.end = droppedEvent.end;
+
+        this.calendar.refresh(this.events);
+    }
+
+    onFormSubmited(event) {
+        this.events.push(event);
+
+        this.selectedEvent = null;
+
+        this.calendar.refresh(this.events);
+
+        this.modal.close();
     }
 }

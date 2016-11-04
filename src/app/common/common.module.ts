@@ -3,11 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { CalendarComponent } from './calendar/calendar.component';
+import { DateTimePickerComponent } from './datetimepicker/datetime-picker.component';
 import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
     CalendarComponent,
+    DateTimePickerComponent,
     ModalComponent
   ],
   imports: [
@@ -16,6 +18,7 @@ import { ModalComponent } from './modal/modal.component';
   ],
   exports: [
     CalendarComponent,
+    DateTimePickerComponent,
     ModalComponent
   ]
 })

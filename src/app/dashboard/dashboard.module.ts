@@ -7,10 +7,12 @@ import { RouterModule }   from '@angular/router';
 import { CommonModule }   from '../common/common.module';
 
 import { DashboardComponent } from './dashboard.component';
+import { EventFormComponent } from './event/event-form.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    EventFormComponent
   ],
   imports: [
     BrowserModule,

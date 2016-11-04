@@ -15,7 +15,6 @@ export class ModalComponent implements OnInit, OnDestroy, OnChanges {
 
     ngOnInit() {
         this.$element = $(this.elmenentRef.nativeElement, '.modal').find('.modal');
-        console.log(this.$element);
     }
 
     ngOnDestroy() {
