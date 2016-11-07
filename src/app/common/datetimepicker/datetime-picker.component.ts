@@ -1,6 +1,6 @@
 
 import { 
-    Component, OnInit, ElementRef, Input, OnDestroy 
+    Component, OnInit, ElementRef, Input, OnDestroy, OnChanges, SimpleChange 
 } from '@angular/core';
 
 @Component({
@@ -14,7 +14,7 @@ import {
         </div>
     `
 })
-export class DateTimePickerComponent implements OnInit, OnDestroy { 
+export class DateTimePickerComponent implements OnInit, OnDestroy, OnChanges { 
     @Input() date;
     private $element: JQuery;
     
@@ -36,5 +36,17 @@ export class DateTimePickerComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.$element.datetimepicker('destroy');
+    }
+
+    ngOnChanges(changes: {[propKey: string]: SimpleChange}) { 
+        for (let propName in changes) {
+            let changedProp = changes[propName];
+            let from = JSON.stringify(changedProp.previousValue);
+            let to =   JSON.stringify(changedProp.currentValue);
+            
+            if (propName === 'date' && this.$element) {
+                this.$element.data('DateTimePicker').date(changedProp.currentValue);
+            }
+        }
     }
 }

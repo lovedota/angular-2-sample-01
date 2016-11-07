@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { DashboardService } from './dashboard.service';
+
 @Component({
     templateUrl: './dashboard.component.html'
 })
@@ -15,29 +17,16 @@ export class DashboardComponent implements OnInit {
         return [...this._events.values()];
     }
 
-    ngOnInit() {
-        setTimeout(() => {
-            let events = [
-                {
-                    id: 1,
-                    title: 'Daily Meeting',
-                    start: moment(),
-                    end: moment().add(2, 'h'),
-                    content: 'Need to do it everyday to talk about what you did yesterday.'
-                },
-                {
-                    id: 2,
-                    title: 'Lunch Time',
-                    start: moment().add(4, 'h'),
-                    end: moment().add(8, 'h'),
-                    content: 'Need to have lunch to refresh health to work in a whole day'
-                }
-            ];
+    constructor(private service: DashboardService) {}
 
-            events.forEach(e => this._events.set(e.id, e));
+    async ngOnInit() {
+        let eventsResponse = await this.service.getEvents();
 
-            this.calendar.refresh(events);
+        eventsResponse.forEach(e => {
+            this._events.set(e.id, Object.assign(e, {start: moment(e.start), end: moment(e.end)}));
         });
+
+        this.calendar.refresh(this.events);
     }
 
     onEventClicked(event) {

@@ -1,0 +1,16 @@
+[
+     {
+        "id": 1,
+        "title": "Daily Meeting",
+        "start": "2016-11-09 09:30:26",
+        "end": "2016-11-09 11:30:26",
+        "content": "Need to do it everyday to talk about what you did yesterday."
+    },
+    {
+        "id": 2,
+        "title": "Online Revolution Shopping",
+        "start": "2016-11-11 06:00:00",
+        "end": "2016-11-11 23:59:59",
+        "content": "Time for shopping"
+    }
+]

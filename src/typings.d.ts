@@ -16,6 +16,7 @@ interface FullCalendarOptions {
     dayClick?: (date: moment.Moment, jsEvent, view) => void;
     editable?: boolean;
     viewRender?: any;
+    header?: any;
 }
 
 interface JQuery {

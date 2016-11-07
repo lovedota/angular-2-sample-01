@@ -9,6 +9,8 @@ import { CommonModule }   from '../common/common.module';
 import { DashboardComponent } from './dashboard.component';
 import { EventFormComponent } from './event/event-form.component';
 
+import { DashboardService } from './dashboard.service';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -25,6 +27,7 @@ import { EventFormComponent } from './event/event-form.component';
       }
     ]),
     CommonModule
-  ]
+  ],
+  providers: [DashboardService]
 })
 export class DashboardModule { }

@@ -59,6 +59,11 @@ export class CalendarComponent implements OnInit, OnDestroy, OnChanges {
             defaultView: 'agendaDay',
             events: [],
             editable: true,
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listWeek'
+            },
             eventClick(event) {
                 self.onEventClicked.emit(event);
             },
@@ -76,6 +81,8 @@ export class CalendarComponent implements OnInit, OnDestroy, OnChanges {
                     if (acceptClasses.includes(event.target.className)) {
                         let time = target.data('time') || target.parent().data('time');
                         let date = element.find('.fc-day-header').data('date');
+
+                        console.log(date, time);
 
                         self.onCalendarClicked.emit(moment(`${date} ${time}`));
                     }       
